@@ -36,6 +36,8 @@ const displayPhone = phones => {
      showPhone.appendChild(div)
 
     })
+
+    // add load more button 
     const loadMore = document.getElementById('loadMore')
      const loadDiv = document.createElement('div')
      loadDiv.innerHTML = `
@@ -51,14 +53,29 @@ const loadBtn = more => {
     fetch(url)
     .then(res => res.json())
     .then(data => displayMore(data.data))
-    // console.log(more)
 }
-const displayMore = mores => {
-    // const allMores = 
-mores.forEach(more => {
-    // console.log(more)
+const displayMore = (mores) => {
+    const morePhone = document.getElementById('show-phone')
+    const allMores = mores.slice(20, 179)
+allMores.forEach(more => {
+    const div = document.createElement('div')
+        div.classList.add('col-md-4')
+        div.innerHTML = `
+        <div class="card">
+            <img src="${more.image}" class="card-img-top" alt="...">
+                <div class="card-body">
+                 <h5 class="card-title">${more.phone_name}</h5>
+                <p class="card-text">${more.brand}</p>
+            <a id="load-button" onclick="phoneDetails('${more.slug}')" href="#" class="btn btn-primary">Phone Details</a>
+        </div>
+        </div>
+    </div>
+     `
+     morePhone.appendChild(div)
 })
 }
+// end load more button 
+
 
 // phone details 
 const phoneDetails = detail => {
@@ -86,10 +103,8 @@ const displayDetails = phone => {
     <li class="list-group-item list-group-item-action">Memory: ${phone.mainFeatures.memory}</li>
     <li class="list-group-item list-group-item-action">Storage: ${phone.mainFeatures.storage}</li>
     <li class="list-group-item list-group-item-action">Display Size: ${phone.mainFeatures.displaySize}</li>
-    <li class="list-group-item list-group-item-action">Others: ${phone.others.WLAN} ${phone.others.Bluetooth} ${phone.others.GPS} ${phone.others.NFC} ${phone.others.Radio} ${phone.others.USB}</li>
   </ul>
 </div>
 
     `
-
 }
