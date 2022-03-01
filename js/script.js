@@ -13,41 +13,41 @@ const searchPhone = () => {
     const inputField = document.getElementById('input-field')
     const searchText = inputField.value
     // inputField.value = ''
-if(!isNaN(searchText) || searchText == ''){
-    error.innerHTML = 'Please Search By Phone Name ✘'
-    showMobile.innerHTML = ''
-    loadButton.innerHTML = ''
-    success.innerHTML = ''
-    showLengths.innerHTML = ''
-    inputField.value = ''
-    
-}else if(searchText <= 0){
-    showMobile.innerHTML = ''
-    loadButton.innerHTML = ''
-    success.innerHTML = ''
-    showLengths.innerHTML = ''
-}else{
-    // Get Api 
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
-            fetch(url)
-        .then(res => res.json())
-        .then(data => displayPhone(data.data))
-        .catch(error => displayError(error))
+    if (!isNaN(searchText) || searchText == '') {
+        error.innerHTML = 'Please Search By Phone Name ✘'
+        showMobile.innerHTML = ''
+        loadButton.innerHTML = ''
+        success.innerHTML = ''
+        showLengths.innerHTML = ''
+        inputField.value = ''
+
+    } else if (searchText <= 0) {
+        showMobile.innerHTML = ''
+        loadButton.innerHTML = ''
+        success.innerHTML = ''
+        showLengths.innerHTML = ''
+    } else {
+        // Get Api 
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => displayPhone(data.data))
+            .catch(error => displayError(error))
         error.innerHTML = ''
         details.innerHTML = ''
-       success.innerHTML = `Great You Got The Phone 😎 ${searchText}`
-    //    inputField.value = ''
-    toggleSpinner('block')
-}
+        success.innerHTML = `Great You Got The Phone 😎 ${searchText}`
+        //    inputField.value = ''
+        toggleSpinner('block')
+    }
 }
 
-const displayError = () =>{
+const displayError = () => {
     success.innerHTML = ''
     document.getElementById('load-button').style.display = 'none'
-   }
+}
 
 // spinner 
-toggleSpinner = displaySpinner =>{
+toggleSpinner = displaySpinner => {
     document.getElementById('spinner').style.display = displaySpinner
 }
 
@@ -55,13 +55,14 @@ toggleSpinner = displaySpinner =>{
 // display data 
 const showLength = document.getElementById('show-length')
 const displayPhone = phones => {
+    // phones length in output 
     showLength.innerHTML = `${phones.length}`
     const showPhone = document.getElementById('show-phone')
     showPhone.textContent = '';
     const allPhone = phones.slice(0, 20)
     allPhone.forEach(phone => {
         const div = document.createElement('div')
-        div.classList.add('col-md-4')
+        div.classList.add('col-lg-4')
         div.innerHTML = `
         <div class="card">
             <img src="${phone.image}" class="card-img-top" alt="...">
@@ -73,7 +74,7 @@ const displayPhone = phones => {
         </div>
     </div>
      `
-     showPhone.appendChild(div)
+        showPhone.appendChild(div)
 
     })
 
@@ -82,12 +83,12 @@ const displayPhone = phones => {
     const loadMore = document.getElementById('loadMore')
     loadMore.textContent = ''
     // load.innerHTML = ''
-     const loadDiv = document.createElement('div')
-     loadDiv.innerHTML = `
+    const loadDiv = document.createElement('div')
+    loadDiv.innerHTML = `
      <div class="text-center">
      <button id="load-button" onclick="loadBtn()" class="btn btn-outline-primary">Load More</button>
      `
-     loadMore.appendChild(loadDiv)
+    loadMore.appendChild(loadDiv)
 }
 const loadBtn = () => {
     // console.log('hello')
@@ -98,16 +99,16 @@ const loadBtn = () => {
     // console.log(searchText);
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     fetch(url)
-    .then(res => res.json())
-    .then(data => displayMore(data.data))
+        .then(res => res.json())
+        .then(data => displayMore(data.data))
     toggleSpinner('block')
 }
 
 const displayMore = (mores) => {
-const morePhone = document.getElementById('show-phone')
+    const morePhone = document.getElementById('show-phone')
     const allMores = mores.slice(20, 179)
-allMores.forEach(more => {
-    const div = document.createElement('div')
+    allMores.forEach(more => {
+        const div = document.createElement('div')
         div.classList.add('col-md-4')
         div.innerHTML = `
         <div class="card">
@@ -120,9 +121,9 @@ allMores.forEach(more => {
         </div>
     </div>
      `
-     morePhone.appendChild(div)
-})
-toggleSpinner('none')
+        morePhone.appendChild(div)
+    })
+    toggleSpinner('none')
 }
 // end load more button 
 
@@ -132,8 +133,8 @@ const phoneDetails = detail => {
     // console.log(detail)
     const url = `https://openapi.programming-hero.com/api/phone/${detail}`
     fetch(url)
-    .then(res => res.json())
-    .then(data => displayDetails(data.data))
+        .then(res => res.json())
+        .then(data => displayDetails(data.data))
     toggleSpinner('block')
 }
 
@@ -142,6 +143,7 @@ const displayDetails = phone => {
     // console.log(phone.mainFeatures.sensors[0])
     console.log(phone)
     document.getElementById('show-detail').innerHTML = `
+    <h3 class="text-white">Product Details</h3>
     <div class="card"">
   <img src="${phone.image}" class="card-img-top" alt="...">
   <div class="card-body">

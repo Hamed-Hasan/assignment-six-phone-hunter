@@ -1,4 +1,11 @@
-#spinner{display: none;}
+/* google fonts  */
+@import url('https://fonts.googleapis.com/css2?family=Road+Rage&display=swap');
+
+/* Basic Setup  */
+* {
+    box-sizing: border-box;
+  } 
+
 
 html {
     height: 100%;
@@ -7,15 +14,35 @@ html {
   body {
     background-image: radial-gradient(circle farthest-corner at center, #3C4B57 0%, #1C262B 100%);
   }
+
+  /* box shadow  */
+#contain {
+    background: rgb(222 222 0 / 0%);
+    box-shadow: inset 10px 20px 20px rgba(0,0,0,0.2),
+  5px 5px 5px rgba(0,0,0,.1),
+  15px 10px 25px rgba(0,0,0,0.2);
+    padding: 110px !important;
+    border-radius: 10px;
+}
+
+.hero-title{
+    font-family: 'Road Rage', cursive;
+}
+
+/* spinner  */
+
+#spinner{display: none;}
+
   
   .loader {
     position: absolute;
-    top: calc(50% - 32px);
+    top: calc(60% - 32px);
     left: calc(50% - 32px);
     width: 64px;
     height: 64px;
     border-radius: 50%;
     perspective: 800px;
+    z-index: 100;
   }
   
   .inner {
@@ -72,4 +99,63 @@ html {
     100% {
       transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
     }
+  }
+
+  /* input search  */
+
+  .search-input.example input[type=text]:focus{
+        border: 0;
+        outline: none;
+  }
+  
+  .search-input.example input[type=text] {
+    padding: 10px 40px;
+    font-size: 17px;
+    border: 0;
+    float: left;
+    width: 70%;
+    background: #f1f1f1;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+  }
+  
+  .search-input.example button {
+    float: left;
+    width: 30%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 0;
+    /* border-left: none; */
+    cursor: pointer;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+  }
+  
+  .search-input.example button:hover {
+    background: #0b7dda;
+  }
+  
+  .search-input.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  /* media quarries  */
+  @media screen and (max-width: 600px) {
+    .hero-title{
+        font-size: 20px;
+    }
+   .example{
+       width: 140% !important;
+       margin-left: -30px !important;
+   }
+   .search-input.example button {
+    width: 40%;
+  }
+  .search-input.example input[type=text] {
+    width: 0%;
+  }
   }
