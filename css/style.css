@@ -15,7 +15,7 @@ html {
     background-image: radial-gradient(circle farthest-corner at center, #3C4B57 0%, #1C262B 100%);
   }
 
-  /* box shadow  */
+  /* box shadow  & images*/
 #contain {
     background: rgb(222 222 0 / 0%);
     box-shadow: inset 10px 20px 20px rgba(0,0,0,0.2),
@@ -23,6 +23,10 @@ html {
   15px 10px 25px rgba(0,0,0,0.2);
     padding: 110px !important;
     border-radius: 10px;
+    background-image: url('/images/hero-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 .hero-title{
