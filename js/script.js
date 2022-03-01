@@ -42,7 +42,7 @@ const searchPhone = () => {
         toggleSpinner('block')
     }
 }
-
+const showDetail = document.getElementById('show-detail')
 const displayError = () => {
     success.innerHTML = ''
     document.getElementById('load-button').style.display = 'none';
@@ -69,10 +69,12 @@ const displayPhone = phones => {
         load.innerHTML = ''
         show.innerHTML = ''
         toggleSpinner('none')
+        showDetail.innerHTML = ''
+
     }
     
     // phones length in output 
-    showLength.innerHTML = `${phones.length}`
+    showLength.innerHTML = `Total Product ${phones.length}`
     const showPhone = document.getElementById('show-phone')
     showPhone.textContent = '';
     const allPhone = phones.slice(0, 20)
@@ -85,7 +87,7 @@ const displayPhone = phones => {
                 <div class="card-body">
                  <h5 class="card-title">${phone.phone_name}</h5>
                 <p class="card-text">${phone.brand}</p>
-            <a onclick="phoneDetails('${phone.slug}')" href="#" class="btn btn-primary">Phone Details</a>
+            <a onclick="phoneDetails('${phone.slug}')" href="#" class="glow-on-hover">Phone Details</a>
         </div>
         </div>
     </div>
@@ -95,24 +97,18 @@ const displayPhone = phones => {
     })
 
     toggleSpinner('none')
-    // add load more button 
     const loadMore = document.getElementById('loadMore')
     loadMore.textContent = ''
-    // load.innerHTML = ''
     const loadDiv = document.createElement('div')
     loadDiv.innerHTML = `
      <div class="text-center">
-     <button id="load-button" onclick="loadBtn()" class="btn btn-outline-primary">Load More</button>
+     <button id="load-button" onclick="loadBtn()" class=" glow-on-hover mt-4">Load More</button>
      `
     loadMore.appendChild(loadDiv)
 }
 const loadBtn = () => {
-    // console.log('hello')
     const inputField = document.getElementById('input-field')
     const searchText = inputField.value
-    // inputField.value = '';
-    // more.slice(0,100)
-    // console.log(searchText);
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     fetch(url)
         .then(res => res.json())
@@ -132,7 +128,7 @@ const displayMore = (mores) => {
                 <div class="card-body">
                  <h5 class="card-title">${more.phone_name}</h5>
                 <p class="card-text">${more.brand}</p>
-            <a onclick="phoneDetails('${more.slug}')" href="#" class="btn btn-primary">Phone Details</a>
+            <a onclick="phoneDetails('${more.slug}')" href="#" class="glow-on-hover">Phone Details</a>
         </div>
         </div>
     </div>
@@ -156,9 +152,9 @@ const phoneDetails = detail => {
 
 // single phone display details
 const displayDetails = phone => {
-    // console.log(phone.mainFeatures.sensors[0])
-    console.log(phone)
-    document.getElementById('show-detail').innerHTML = `
+const showDetails = document.getElementById('show-detail')
+showDetails.textContent = ''
+    showDetails.innerHTML = `
     <h3 class="text-white">Product Details</h3>
     <div class="card"">
   <img src="${phone.image}" class="card-img-top" alt="...">
