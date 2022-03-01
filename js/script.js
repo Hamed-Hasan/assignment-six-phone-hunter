@@ -20,12 +20,14 @@ const searchPhone = () => {
         success.innerHTML = ''
         showLengths.innerHTML = ''
         inputField.value = ''
+        toggleSpinner('none')
 
     } else if (searchText <= 0) {
         showMobile.innerHTML = ''
         loadButton.innerHTML = ''
         success.innerHTML = ''
         showLengths.innerHTML = ''
+        toggleSpinner('none')
     } else {
         // Get Api 
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
@@ -43,18 +45,32 @@ const searchPhone = () => {
 
 const displayError = () => {
     success.innerHTML = ''
-    document.getElementById('load-button').style.display = 'none'
+    document.getElementById('load-button').style.display = 'none';
+    showMobile.innerHTML = ''
+    showLength.innerHTML = ''
+    toggleSpinner('none')
 }
 
 // spinner 
 toggleSpinner = displaySpinner => {
-    document.getElementById('spinner').style.display = displaySpinner
+    document.getElementById('spinner').style.display = displaySpinner;
 }
 
 
 // display data 
+const show = document.getElementById('show-phone')
+const load = document.getElementById('load-button')
 const showLength = document.getElementById('show-length')
 const displayPhone = phones => {
+    if(phones.length != 0){
+    }else{
+        success.innerHTML = ''
+        error.innerHTML = 'Please Search By Phone Name ✘'
+        load.innerHTML = ''
+        show.innerHTML = ''
+        toggleSpinner('none')
+    }
+    
     // phones length in output 
     showLength.innerHTML = `${phones.length}`
     const showPhone = document.getElementById('show-phone')
