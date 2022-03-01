@@ -3,16 +3,25 @@ const showMobile = document.getElementById('show-phone')
 const details = document.getElementById('show-detail')
 const loadButton = document.getElementById('loadMore')
 const showLengths = document.getElementById('show-length')
+const loadSpinner = document.getElementById('spinner')
 const success = document.getElementById('success')
 const error = document.getElementById('error')
 // const load = document.getElementById('load-button')
 // Input Field Search 
 
-
 const searchPhone = () => {
     const inputField = document.getElementById('input-field')
     const searchText = inputField.value
     // inputField.value = ''
+
+
+    if (typeof searchText !== 'number') {
+        showLength.innerHTML = ''
+        success.innerHTML = ''
+        // loadSpinner.textContent = ''
+        // inputField.value = ''
+
+    }
     if (!isNaN(searchText) || searchText == '') {
         error.innerHTML = 'Please Search By Phone Name ✘'
         showMobile.innerHTML = ''
@@ -42,10 +51,12 @@ const searchPhone = () => {
         toggleSpinner('block')
     }
 }
+const moreProduct = document.getElementById('load-button')
 const showDetail = document.getElementById('show-detail')
 const displayError = () => {
     success.innerHTML = ''
-    document.getElementById('load-button').style.display = 'none';
+    moreProduct.style.display = 'none'
+    // document.getElementById('load-button').style.display = 'none';
     showMobile.innerHTML = ''
     showLength.innerHTML = ''
     toggleSpinner('none')
@@ -62,8 +73,9 @@ const show = document.getElementById('show-phone')
 const load = document.getElementById('load-button')
 const showLength = document.getElementById('show-length')
 const displayPhone = phones => {
-    if(phones.length != 0){
-    }else{
+    if (phones.length != 0) {
+
+    } else {
         success.innerHTML = ''
         error.innerHTML = 'Please Search By Phone Name ✘'
         load.innerHTML = ''
@@ -72,7 +84,7 @@ const displayPhone = phones => {
         showDetail.innerHTML = ''
 
     }
-    
+
     // phones length in output 
     showLength.innerHTML = `Total Product ${phones.length}`
     const showPhone = document.getElementById('show-phone')
@@ -87,7 +99,7 @@ const displayPhone = phones => {
                 <div class="card-body">
                  <h5 class="card-title">${phone.phone_name}</h5>
                 <p class="card-text">${phone.brand}</p>
-            <a onclick="phoneDetails('${phone.slug}')" href="#" class="glow-on-hover">Phone Details</a>
+            <a onclick="phoneDetails('${phone.slug}')" href="#" class="glow-on-hover">Product Details</a>
         </div>
         </div>
     </div>
@@ -102,7 +114,7 @@ const displayPhone = phones => {
     const loadDiv = document.createElement('div')
     loadDiv.innerHTML = `
      <div class="text-center">
-     <button id="load-button" onclick="loadBtn()" class=" glow-on-hover mt-4">Load More</button>
+     <button id="load-button" onclick="loadBtn()" class=" glow-on-hover mt-4">Load More  <i class="fa-solid fa-arrow-down text-white ms-2"></i></button>
      `
     loadMore.appendChild(loadDiv)
 }
@@ -128,7 +140,7 @@ const displayMore = (mores) => {
                 <div class="card-body">
                  <h5 class="card-title">${more.phone_name}</h5>
                 <p class="card-text">${more.brand}</p>
-            <a onclick="phoneDetails('${more.slug}')" href="#" class="glow-on-hover">Phone Details</a>
+            <a onclick="phoneDetails('${more.slug}')" href="#" class="glow-on-hover">Product Details</a>
         </div>
         </div>
     </div>
@@ -142,7 +154,6 @@ const displayMore = (mores) => {
 
 // phone details 
 const phoneDetails = detail => {
-    // console.log(detail)
     const url = `https://openapi.programming-hero.com/api/phone/${detail}`
     fetch(url)
         .then(res => res.json())
@@ -152,8 +163,8 @@ const phoneDetails = detail => {
 
 // single phone display details
 const displayDetails = phone => {
-const showDetails = document.getElementById('show-detail')
-showDetails.textContent = ''
+    const showDetails = document.getElementById('show-detail')
+    showDetails.textContent = ''
     showDetails.innerHTML = `
     <h3 class="text-white">Product Details</h3>
     <div class="card"">
